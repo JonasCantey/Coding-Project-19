@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Gallery from "./components/Gallery";
+import "./styles/styles.css";
 
 function App() {
   //Glbl state to hold list of tours
