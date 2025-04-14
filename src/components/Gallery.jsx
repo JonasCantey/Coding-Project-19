@@ -12,7 +12,7 @@ const Gallery = ({tours, setTours, onRemove}) => {
 
     const fetchTours = async () => {
         try {
-            const response = await fetch("https://course-api.com/react-tours-project")
+            const response = await fetch("https://api.allorigins.win/raw?url=https://course-api.com/react-tours-project")
             //map the api data to only the field needed
 
             const data = await response.json();
@@ -38,9 +38,12 @@ if (error) return <h2>Something went wrong...</h2>;
 //render if no tour remain
 
 if (tours.length === 0) {
-    return <h2>No tours left</h2>;
-    <button onClick={fetchTours}>Refresh</button>;
-    //render the list of TourCards
+    return (
+        <div>
+          <h2>No tours left</h2>
+          <button onClick={fetchTours}>Refresh</button>
+        </div>
+      );
 }
 return (
     <section className="tour-list">
@@ -49,9 +52,9 @@ return (
                 <TourCard
                 key={tour.id}
                 {...tour}
-                onRemove={removeTour}
+                onRemove={onRemove}
             />
-        ))};
+        ))}
     </section>
 );
 };
