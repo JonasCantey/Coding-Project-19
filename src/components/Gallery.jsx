@@ -15,14 +15,8 @@ const Gallery = ({tours, setTours, onRemove}) => {
             const response = await fetch("https://course-api.com/react-tours-project")
             //map the api data to only the field needed
 
-            const trimmed = data.results.map((tour) => ({
-                id: tour.id,
-                name: tour.name,
-                info: tour.info,
-                price: tour.price,
-                image: tour.image
-            }));
-           setTours(trimmed);
+            const data = await response.json();
+           setTours(data);
            setLoading(false);
     } catch (error) {
         setError(true);
@@ -37,35 +31,29 @@ useEffect(() => {
 
 //render loading state
 
-if (loading) {
-    return <h2>Loading...</h2>
-};
+if (loading) return <h2>Loading...</h2>;
 
-if (error) {
-    return <h2>Something went wrong...</h2>
-};
+if (error) return <h2>Something went wrong...</h2>;
 
 //render if no tour remain
 
 if (tours.length === 0) {
     return <h2>No tours left</h2>;
-    <button onClicl={fetchTours}>Refresh</button>;
+    <button onClick={fetchTours}>Refresh</button>;
     //render the list of TourCards
+}
 return (
     <section className="tour-list">
-        {tours.map((tour) => {
-            return (
+        {tours.map((tour) => (
+            
                 <TourCard
                 key={tour.id}
                 {...tour}
-                onRemove={onRemove}
-                />
-            );
-        })}
+                onRemove={removeTour}
+            />
+        ))};
     </section>
 );
-};
-
 };
 
 export default Gallery;
