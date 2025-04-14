@@ -3,7 +3,7 @@ import TourCard from "./TourCard";
 
 //Gallery is responsible for fetching tours and rendering list
 
-const Gallery = ({tours, setTours, onRemove}) => {
+const Gallery = ({tours, setTours, removeTour}) => {
     //Local state to manage loading and errors
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -52,7 +52,7 @@ return (
                 <TourCard
                 key={tour.id}
                 {...tour}
-                onRemove={onRemove}
+                onRemove={removeTour}
             />
         ))}
     </section>
